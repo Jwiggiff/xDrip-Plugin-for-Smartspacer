@@ -38,7 +38,7 @@ class XDripComplication: SmartspacerComplicationProvider() {
                     )
                 ),
                 content = Text("%.1f $bgIcon".format(bg)),
-                onClick = TapAction(intent = provideContext().packageManager.getLaunchIntentForPackage(xdripPackageName!!))
+                onClick = TapAction(intent = provideContext().packageManager.getLaunchIntentForPackage(xdripPackageName))
             ).create()
         ) else emptyList()
     }
@@ -55,7 +55,7 @@ class XDripComplication: SmartspacerComplicationProvider() {
 
     private fun getCompatibilityState(): CompatibilityState {
         try {
-            provideContext().packageManager.getPackageInfo(xdripPackageName!!, PackageManager.GET_ACTIVITIES)
+            provideContext().packageManager.getPackageInfo(xdripPackageName, PackageManager.GET_ACTIVITIES)
         } catch (e: PackageManager.NameNotFoundException) {
             return CompatibilityState.Incompatible("xDrip is not installed!")
         }
